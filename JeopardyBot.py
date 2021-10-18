@@ -1,24 +1,43 @@
 import discord
 import os
 from dotenv import load_dotenv
+from discord.ext import commands
+from requests import get
+
+
+
 
 load_dotenv()
 
-client = discord.Client()
+#client = discord.Client()
+bot = commands.bot(command_prefix ='!')
 
-@client.event
+
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('We have logged in as {0.user}'.format(bot.user))
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
+@bot.command(name="animeq", help="Provides an anime trivia question, courtesy of opentdb.com")
+async def animeq(ctx):
+    '''if message.author == client.user:
         return
 
     if message.content.startswith('j!animeq'):
         await message.channel.send('Here is your anime trvia question:')
         
     if message.content.startswith('j!q'):
-        await message.channel.send('Here is your Jeopardy question:')
+        await message.channel.send('Here is your Jeopardy question:')'''
 
-client.run(os.environ['BOT_TOKEN'])
+    await ctx.send("Here's your anime trivia question:\n")
+
+    request = get('https://opentdb.com/api.php?amount=1&category=31'.json())
+    difficulty = request.get("results")[0].get("difficulty")
+    question = request.get("results")[0].get("question")
+    correct_answer = request.get("results")[0].get("correct_answer")
+    incorrect_answers = request.get("results")[0].get("incorrect_answers")
+
+    await ctx.send("The difficulty is " + difficulty)
+    await ctx.send("The question is " + question)
+    await ctx.send("The correct answer is " + correct_answer)
+
+bot.run(os.environ['BOT_TOKEN'])
