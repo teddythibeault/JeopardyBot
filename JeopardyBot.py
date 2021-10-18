@@ -1,9 +1,8 @@
 import discord
 import os
 from dotenv import load_dotenv
-<<<<<<< HEAD
 from discord.ext import commands
-from requests import get
+import requests
 
 
 
@@ -20,30 +19,7 @@ async def on_ready():
 
 @bot.command(name="animeq", help="Provides an anime trivia question, courtesy of opentdb.com")
 async def animeq(ctx):
-    '''if message.author == client.user:
-=======
-
-load_dotenv()
-
-client = discord.Client()
-
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
->>>>>>> 003a4f2b2f93a49963d33c6330734f61ba0fdf8b
-        return
-
-    if message.content.startswith('j!animeq'):
-        await message.channel.send('Here is your anime trvia question:')
-        
-    if message.content.startswith('j!q'):
-<<<<<<< HEAD
-        await message.channel.send('Here is your Jeopardy question:')'''
-
+    
     await ctx.send("Here's your anime trivia question:\n")
 
     request = get('https://opentdb.com/api.php?amount=1&category=31'.json())
