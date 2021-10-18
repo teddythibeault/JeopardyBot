@@ -33,8 +33,3 @@ async def animeq(ctx):
     await ctx.send("The correct answer is " + correct_answer)
 
 bot.run(os.environ['BOT_TOKEN'])
-=======
-        await message.channel.send('Here is your Jeopardy question:')
-
-client.run(os.environ['BOT_TOKEN'])
->>>>>>> 003a4f2b2f93a49963d33c6330734f61ba0fdf8b
